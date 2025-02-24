@@ -11,7 +11,7 @@ module rec_gen(
         if (rst) 
             rec_out <= 8'd0;
         else begin           
-                if(phase[7:0] < (256/256)*duty_cycle)
+                if(phase[7:0] < duty_cycle)
 										 rec_out = lut;
 							 else		 rec_out = -lut;
 				 end
