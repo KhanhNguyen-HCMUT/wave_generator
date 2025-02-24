@@ -1,7 +1,7 @@
 module tria_gen(
     input wire rst,
     input wire [7:0] phase,           // Pha đầu vào (8-bit)
-    output reg [7:0] tria_out         // Sóng sine đầu ra (8-bit)
+    output reg [7:0] tria_out         
 );
  wire [7:0] lut [0:63];
 
@@ -26,7 +26,7 @@ assign  lut[60] = 8'h78; assign lut[61] = 8'h7A; assign lut[62] = 8'h7C; assign 
         if (rst) 
             tria_out <= 8'd0;
         else begin
-            case (phase[7:6])           // Xác định phần tư của chu kỳ
+            case (phase[7:6])           
                 2'b00: tria_out <= lut[phase[5:0]];                          // 0° - 90°
                 2'b01: tria_out <= lut[~phase[5:0]];                         // 90° - 180°
                 2'b10: tria_out <= ~lut[phase[5:0]] + 8'd1;                  // 180° - 270°
