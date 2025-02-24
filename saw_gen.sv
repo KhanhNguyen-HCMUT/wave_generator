@@ -1,7 +1,7 @@
 module saw_gen(
     input wire rst,
-    input wire [7:0] phase,           // Pha đầu vào (8-bit)
-    output reg [7:0] saw_out         // Sóng sine đầu ra (8-bit)
+    input wire [7:0] phase,           
+    output reg [7:0] saw_out        
 );
 wire [7:0] lut [0:63];
 
