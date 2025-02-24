@@ -1,7 +1,7 @@
 module rec_gen(
     input wire rst,
     input wire [7:0] phase,
-	input wire [7:0] duty_cycle,  // Duty cycle (0-256)
+	input wire [7:0] duty_cycle,  // Duty cycle (0-255)
     output reg [7:0] rec_out         
 );
     wire [7:0] lut;              
