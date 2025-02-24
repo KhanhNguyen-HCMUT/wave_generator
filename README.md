@@ -1,9 +1,9 @@
 # wave_generator
 Lab 1 project for DSP on FPGA.
 Team member: 
-- Nguyen Dang Khanh (khanh.nguyendang@hcmut.edu.vn)
-- Nguyen Van Trong Hieu
-- Bui Khanh Hoang
+- Nguyen Dang Khanh (khanh.nguyendang@hcmut.edu.vn).
+- Nguyen Van Trong Hieu.
+- Bui Khanh Hoang.
 The wave generator consists of:
 - 4 sub-modules:
   + phase_control: control the phase acculmulation to adjust the frequency of wave_out
