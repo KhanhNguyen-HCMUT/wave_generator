@@ -11,7 +11,7 @@ module wave_gen_tb;
     reg inj_sel;
     wire [15:0] wave_out;
 
-    // Instantiate the DUT (Device Under Test)
+    // Instantiate the DUT
     wave_gen uut (
         .clk(clk),
         .rst(rst),
@@ -24,11 +24,12 @@ module wave_gen_tb;
         .wave_out(wave_out)
     );
 
-    // Generate 10 ns clock period
+    // Generate 4 ns clock period
     always #2 clk = ~clk;
 
     initial begin
-        // Initialize signals
+        
+	//Case 1:
         clk = 0;
         rst = 1;
         freq = 8'd1;
@@ -39,12 +40,12 @@ module wave_gen_tb;
         wave_sel = 2'b00;
         // Hold reset for a short period
         #15 rst = 0;
-
         // Simulation time division into 4 parts
         #5000 wave_sel = 2'b01; // 1/4 time
         #5000 wave_sel = 2'b10; // 2/4 time
         #5000 wave_sel = 2'b11; // 3/4 time
         #5000;
+	//Case 2:
         rst = 1;
 	amp = 5;
         freq = 8'd2;
@@ -57,14 +58,9 @@ module wave_gen_tb;
         #8000 wave_sel = 2'b10; // 2/4 time
         #8000 wave_sel = 2'b11; // 3/4 time
         #8000;
+        #500 rst = 0;
 
-        #1000 rst = 0;
-
-        // Simulation time division into 4 parts
-        #5000 wave_sel = 2'b01; // 1/4 time
-        #5000 wave_sel = 2'b10; // 2/4 time
-        #5000 wave_sel = 2'b11; // 3/4 time
-        #5000;
+        //Case 3:
         rst = 1;
 	amp = 8;
         freq = 8'd10;
@@ -78,13 +74,9 @@ module wave_gen_tb;
         #32000 wave_sel = 2'b11; // 3/4 time
         #32000;
         #1000 rst = 0;
-
-        // Simulation time division into 4 parts
-        #5000 wave_sel = 2'b01; // 1/4 time
-        #5000 wave_sel = 2'b10; // 2/4 time
-        #5000 wave_sel = 2'b11; // 3/4 time
-        #5000;
-        rst = 1;
+      
+	//Case 4:
+	rst = 1;
 	amp = 8;
         freq = 8'd1;
         noise_in = 8'd0;
@@ -96,6 +88,21 @@ module wave_gen_tb;
         #32000 wave_sel = 2'b10; // 2/4 time
         #32000 wave_sel = 2'b11; // 3/4 time
         #32000;
+
+	//Case 5:
+	rst = 1;
+	amp = 8;
+        freq = 8'd1;
+        noise_in = 8'd0;
+        inj_sel = 1'b0;
+        wave_sel = 2'b00;  
+	duty_cycle = 0;   
+	#15 rst = 0;
+        #32000 wave_sel = 2'b01; // 1/4 time
+        #32000 wave_sel = 2'b10; // 2/4 time
+        #32000 wave_sel = 2'b11; // 3/4 time
+        #32000;
+
         // End simulation
         $stop;
     end
