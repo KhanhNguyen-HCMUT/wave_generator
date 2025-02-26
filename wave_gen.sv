@@ -1,13 +1,14 @@
 module wave_gen(
     input logic clk,
     input logic rst,
-    input logic signed [7:0] amp,     
+    input logic signed [7:0] wave_amp,
+	 input logic signed [7:0] noise_amp, 
     input logic [7:0] freq,
     input logic [1:0] wave_sel,
     input logic inj_sel,
 	 input logic [7:0] duty_cycle,
     output logic signed [15:0] wave_out, 
-	 output logic signed [7:0] noise_out
+	 output logic signed [15:0] noise_out
 );
 
 logic signed [7:0] wave_preout;
@@ -35,11 +36,10 @@ always @(*) begin
     endcase
 end
 
-always @(*) begin
-    mult_result = amp * wave_preout; 
-end
+assign mult_result = wave_amp * wave_preout; 
 
-assign noise_out = noise; //Đưa nhiễu ra ngoài để quan sát
+
+assign noise_out = noise * noise_amp; //Đưa nhiễu ra ngoài để quan sát
 
 always @(*) begin
     case (inj_sel) 
