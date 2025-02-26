@@ -6,9 +6,9 @@ module wave_gen_tb;
     reg clk;
     reg rst;
     reg [7:0] freq;
-    reg [7:0] noise_in;
     reg [1:0] wave_sel;
     reg inj_sel;
+    wire [7:0] noise_out;
     wire [15:0] wave_out;
 
     // Instantiate the DUT
@@ -18,9 +18,9 @@ module wave_gen_tb;
         .freq(freq),
 	.amp(amp),
 	.duty_cycle(duty_cycle),
-        .noise_in(noise_in),
         .wave_sel(wave_sel),
         .inj_sel(inj_sel),
+	.noise_out(noise_out),
         .wave_out(wave_out)
     );
 
@@ -33,7 +33,6 @@ module wave_gen_tb;
         clk = 0;
         rst = 1;
         freq = 8'd1;
-        noise_in = 8'd0;
         inj_sel = 1'b0;
 	amp = 1;
 	duty_cycle = 128;
@@ -49,7 +48,6 @@ module wave_gen_tb;
         rst = 1;
 	amp = 5;
         freq = 8'd2;
-        noise_in = 8'd0;
         inj_sel = 1'b0;
         wave_sel = 2'b00;
 	duty_cycle = 64;     
@@ -64,7 +62,6 @@ module wave_gen_tb;
         rst = 1;
 	amp = 8;
         freq = 8'd10;
-        noise_in = 8'd0;
         inj_sel = 1'b0;
         wave_sel = 2'b00;  
 	duty_cycle = 224;   
@@ -79,7 +76,6 @@ module wave_gen_tb;
 	rst = 1;
 	amp = 8;
         freq = 8'd1;
-        noise_in = 8'd0;
         inj_sel = 1'b0;
         wave_sel = 2'b00;  
 	duty_cycle = 255;   
@@ -93,7 +89,6 @@ module wave_gen_tb;
 	rst = 1;
 	amp = 8;
         freq = 8'd1;
-        noise_in = 8'd0;
         inj_sel = 1'b0;
         wave_sel = 2'b00;  
 	duty_cycle = 0;   
@@ -103,6 +98,18 @@ module wave_gen_tb;
         #32000 wave_sel = 2'b11; // 3/4 time
         #32000;
 
+	//Case 6:
+	rst = 1;
+	amp = 8;
+        freq = 8'd2;
+        inj_sel = 1'b1;
+        wave_sel = 2'b00;  
+	duty_cycle = 128;   
+	#15 rst = 0;
+        #32000 wave_sel = 2'b01; // 1/4 time
+        #32000 wave_sel = 2'b10; // 2/4 time
+        #32000 wave_sel = 2'b11; // 3/4 time
+        #32000;
         // End simulation
         $stop;
     end
