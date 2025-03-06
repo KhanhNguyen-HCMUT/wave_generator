@@ -35,8 +35,8 @@ always @(*) begin
         3'b001: wave_preout = rec_wave;
         3'b010: wave_preout = saw_wave;
         3'b011: wave_preout = tria_wave;
-		  3'b100: wave_preout = ecg_wave;
-		  default: wave_preout = 0;
+ 	3'b100: wave_preout = ecg_wave;
+	default: wave_preout = 0;
     endcase
 end
 
