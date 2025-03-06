@@ -7,7 +7,7 @@ Team member:
 - Bui Khanh Hoang.
 
 The wave generator consists of:
-- 6 sub-modules:
+- 7 sub-modules:
   + phase_control: control the phase acculmulation to adjust the frequency of wave_out
   + rec_gen: generate a rectangle wave.
   + saw_gen: generate a sawtooth wave.
