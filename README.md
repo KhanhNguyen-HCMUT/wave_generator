@@ -7,12 +7,13 @@ Team member:
 - Bui Khanh Hoang.
 
 The wave generator consists of:
-- 5 sub-modules:
+- 6 sub-modules:
   + phase_control: control the phase acculmulation to adjust the frequency of wave_out
   + rec_gen: generate a rectangle wave.
   + saw_gen: generate a sawtooth wave.
   + tria_gen: generate a triangle wave.
   + sine_gen: generate a sinusoidal wave.
+  + ecg_gen: generate a ecg wave.
   + noise_gen: generate a random noise using linear feedback shift register (LFSR).
 - 1 top module (wave_gen):
   + Choose the waveform for wave_out.
