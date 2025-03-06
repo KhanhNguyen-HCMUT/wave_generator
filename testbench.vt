@@ -7,7 +7,7 @@ module wave_gen_tb;
     reg clk;
     reg rst;
     reg [7:0] freq;
-    reg [1:0] wave_sel;
+    reg [2:0] wave_sel;
     reg inj_sel;
     wire [15:0] noise_out;
     wire [15:0] wave_out;
@@ -39,95 +39,105 @@ module wave_gen_tb;
 	wave_amp = 1;
 	noise_amp = 1;
 	duty_cycle = 128;
-        wave_sel = 2'b00;
+        wave_sel = 3'b100;
         // Hold reset for a short period
         #15 rst = 0;
         // Simulation time division into 4 parts
-        #5000 wave_sel = 2'b01; // 1/4 time
-        #5000 wave_sel = 2'b10; // 2/4 time
-        #5000 wave_sel = 2'b11; // 3/4 time
+        #5000 wave_sel = 3'b000; // 1/4 time
+	#5000 wave_sel = 3'b001; // 1/4 time
+        #5000 wave_sel = 3'b010; // 2/4 time
+        #5000 wave_sel = 3'b011; // 3/4 time
         #5000;
-	//Case 2:
-        rst = 1;
-	wave_amp = 5;
-        freq = 8'd2;
-        inj_sel = 1'b0;
-        wave_sel = 2'b00;
-	duty_cycle = 64;     
-	#15 rst = 0;
-        #8000 wave_sel = 2'b01; // 1/4 time
-        #8000 wave_sel = 2'b10; // 2/4 time
-        #8000 wave_sel = 2'b11; // 3/4 time
-        #8000;
-        #500 rst = 0;
 
-        //Case 3:
+	//Case 2:
+        clk = 0;
         rst = 1;
-	wave_amp = 8;
-        freq = 8'd10;
-        inj_sel = 1'b0;
-        wave_sel = 2'b00;  
-	duty_cycle = 224;   
-	#15 rst = 0;
-        #32000 wave_sel = 2'b01; // 1/4 time
-        #32000 wave_sel = 2'b10; // 2/4 time
-        #32000 wave_sel = 2'b11; // 3/4 time
-        #32000;
-        #1000 rst = 0;
-      
-	//Case 4:
-	rst = 1;
-	wave_amp = 8;
         freq = 8'd1;
         inj_sel = 1'b0;
-        wave_sel = 2'b00;  
-	duty_cycle = 255;   
-	#15 rst = 0;
-        #32000 wave_sel = 2'b01; // 1/4 time
-        #32000 wave_sel = 2'b10; // 2/4 time
-        #32000 wave_sel = 2'b11; // 3/4 time
-        #32000;
+	wave_amp = 5;
+	noise_amp = 1;
+	duty_cycle = 128;
+        wave_sel = 3'b100;
+        // Hold reset for a short period
+        #15 rst = 0;
+        // Simulation time division into 4 parts
+        #5000 wave_sel = 3'b000; // 1/4 time
+	#5000 wave_sel = 3'b001; // 1/4 time
+        #5000 wave_sel = 3'b010; // 2/4 time
+        #5000 wave_sel = 3'b011; // 3/4 time
+        #5000;
+
+	//Case 3:
+        clk = 0;
+        rst = 1;
+        freq = 8'd5;
+        inj_sel = 1'b0;
+	wave_amp = 5;
+	noise_amp = 1;
+	duty_cycle = 128;
+        wave_sel = 3'b100;
+        // Hold reset for a short period
+        #15 rst = 0;
+        // Simulation time division into 4 parts
+        #15000 wave_sel = 3'b000; // 1/4 time
+	#15000 wave_sel = 3'b001; // 1/4 time
+        #15000 wave_sel = 3'b010; // 2/4 time
+        #15000 wave_sel = 3'b011; // 3/4 time
+        #15000;
+
+	//Case 4:
+        clk = 0;
+        rst = 1;
+        freq = 8'd5;
+        inj_sel = 1'b1;
+	wave_amp = 5;
+	noise_amp = 1;
+	duty_cycle = 128;
+        wave_sel = 3'b100;
+        // Hold reset for a short period
+        #15 rst = 0;
+        // Simulation time division into 4 parts
+        #15000 wave_sel = 3'b000; // 1/4 time
+	#15000 wave_sel = 3'b001; // 1/4 time
+        #15000 wave_sel = 3'b010; // 2/4 time
+        #15000 wave_sel = 3'b011; // 3/4 time
+        #15000;
 
 	//Case 5:
-	rst = 1;
-	wave_amp = 8;
-        freq = 8'd1;
-        inj_sel = 1'b0;
-        wave_sel = 2'b00;  
-	duty_cycle = 0;   
-	#15 rst = 0;
-        #32000 wave_sel = 2'b01; // 1/4 time
-        #32000 wave_sel = 2'b10; // 2/4 time
-        #32000 wave_sel = 2'b11; // 3/4 time
-        #32000;
+        clk = 0;
+        rst = 1;
+        freq = 8'd5;
+        inj_sel = 1'b1;
+	wave_amp = 5;
+	noise_amp = 3;
+	duty_cycle = 128;
+        wave_sel = 3'b100;
+        // Hold reset for a short period
+        #15 rst = 0;
+        // Simulation time division into 4 parts
+        #15000 wave_sel = 3'b000; // 1/4 time
+	#15000 wave_sel = 3'b001; // 1/4 time
+        #15000 wave_sel = 3'b010; // 2/4 time
+        #15000 wave_sel = 3'b011; // 3/4 time
+        #15000;
 
 	//Case 6:
-	rst = 1;
-	wave_amp = 8;
-        freq = 8'd2;
-        inj_sel = 1'b1;
-        wave_sel = 2'b00;  
-	duty_cycle = 128;   
-	#15 rst = 0;
-        #32000 wave_sel = 2'b01; // 1/4 time
-        #32000 wave_sel = 2'b10; // 2/4 time
-        #32000 wave_sel = 2'b11; // 3/4 time
-        #32000;
-
-	//Case 7:
-	rst = 1;
-	wave_amp = 8;
-        freq = 8'd2;
+        clk = 0;
+        rst = 1;
+        freq = 8'd5;
+        inj_sel = 1'b0;
+	wave_amp = 5;
 	noise_amp = 3;
-        inj_sel = 1'b1;
-        wave_sel = 2'b00;  
-	duty_cycle = 128;   
-	#15 rst = 0;
-        #32000 wave_sel = 2'b01; // 1/4 time
-        #32000 wave_sel = 2'b10; // 2/4 time
-        #32000 wave_sel = 2'b11; // 3/4 time
-        #32000;
-        // End simulation
+	duty_cycle = 0;
+        wave_sel = 3'b001;
+        // Hold reset for a short period
+        #15 rst = 0;
+        // Simulation time division into 4 parts
+        #15000 duty_cycle = 56; // 1/4 time
+	#15000 duty_cycle = 128; // 1/4 time
+        #15000 duty_cycle = 190; // 2/4 time
+        #15000 duty_cycle = 255; // 3/4 time
+        #15000;
         $stop;
     end
 endmodule
